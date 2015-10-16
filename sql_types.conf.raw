@@ -8,6 +8,7 @@
 # 2 - pgsql data type(dst).
 # 3 - nosize flag. If it set then no transfer size of mysql type to pgsql
 
+
 [numeric]
 tinyint;smallint;nosize
 smallint;smallint;nosize
