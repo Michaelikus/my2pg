@@ -1,0 +1,74 @@
+# MySQL to PgSQL types conversion table
+# Some types get from https://en.wikibooks.org/wiki/Converting_MySQL_to_PostgreSQL#Data_Types
+
+# Format
+# MySQL
+# 1;2;3
+# 1 - mysql data type(src).
+# 2 - pgsql data type(dst).
+# 3 - nosize flag. If it set then no transfer size of mysql type to pgsql
+
+[numeric]
+tinyint;smallint;nosize
+smallint;smallint;nosize
+mediumint;integer;nosize
+int;integer;nosize
+bigint;numeric(20,0);nosize
+
+tinyint unsigned;smallint;nosize
+smallint unsigned;smallint;nosize
+mediumint unsigned;integer;nosize
+int unsigned;bigint;nosize
+bigint unsigned;numeric(20,0);nosize
+
+decimal;decimal;
+numeric;numeric;
+
+float;float;nosize
+float unsigned;float;nosize
+
+double;double precision;nosize
+bit;bit;
+
+[Boolean]
+boolean;boolean;nosize
+
+[DateTime]
+date;date;nosize
+datetime;timestamp;nosize
+timestamp;timestamp;nosize
+time;varchar(9);nosize
+year;numeric(4,0);nosize
+
+[Text]
+tinytext;text;nosize
+mediumtext;text;nosize
+longtext;text;nosize
+text;text;nosize
+
+[Character]
+char;char;
+varchar;varchar;
+
+[BLOB]
+binary;bytea;nosize
+varbinary;bytea;nosize
+tinyblob;bytea;nosize
+mediumblob;bytea;nosize
+longblob;bytea;nosize
+blob;bytea;nosize
+
+[ENUM]
+# there is two types of enum conversion are supported: enum as type and enum as check constraint
+# only one at time can be activated
+enum;type;
+#enum;check;
+
+[auto_increment]
+# there is two types of auto_increment fields are supported: serial and bigserial
+# only one at time can be activated
+#auto_incremant;serial;
+auto_incremant;bigserial;
+
+[Triggers]
+timestamp_on_update;tr_update_;f_update_timestamp
